@@ -1,6 +1,6 @@
 ARG BASE_VERSION="41"
 
-FROM ghcr.io/gbraad-devenv/fedora/rdesktop:${BASE_VERSION}
+FROM ghcr.io/gbraad-devenv/fedora/dotfiles:${BASE_VERSION}
 
 USER root
 
