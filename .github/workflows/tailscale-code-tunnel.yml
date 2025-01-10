@@ -1,0 +1,35 @@
+name: tailscale-code-tunnel
+on:
+  workflow_dispatch:
+
+jobs:
+  code-test:
+    runs-on: ubuntu-24.04
+    
+    steps:
+      - name: Remove unwanted stuff
+        uses: gbraad-devenv/remove-unwanted@v1
+      - name: Run system container with `podman`
+        run: |
+          podman run -d --name code --hostname code-${HOSTNAME} --systemd=always --cap-add=NET_RAW --cap-add=NET_ADMIN --cap-add=SYS_ADMIN --device=/dev/net/tun --device=/dev/fuse ghcr.io/gbraad-devenv/fedora-golang/code-cli:41
+      - name: Tailscale setup (root)
+        run: |
+          until podman exec code tailscale up --auth-key ${TAILSCALE_AUTHKEY} --ssh
+          do
+              sleep 0.1
+          done
+          podman exec code chmod 640 /etc/shadow
+        env:
+          TAILSCALE_AUTHKEY: ${{ secrets.TAILSCALE_AUTHKEY}}
+      - name: Start `code tunnel` as `gbraad`
+        run: |
+          podman exec code su - gbraad -c "code tunnel user login --provider github"
+          podman exec code systemctl enable --now code-tunnel@gbraad
+      - name: Hang around
+        run: |
+          until podman exec code systemctl is-active --quiet code-tunnel@gbraad
+          do
+               sleep 1
+          done
+          echo "Connect to tunnel: code-${HOSTNAME}"
+          sleep infinity
