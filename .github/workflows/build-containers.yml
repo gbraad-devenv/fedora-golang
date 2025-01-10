@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+      - name: Run podman build - base
+        run: podman build -t ghcr.io/gbraad-devenv/fedora-golang/base:41 -f containers/Containerfile-base .
       - name: Run podman build - dotfiles
         run: podman build -t ghcr.io/gbraad-devenv/fedora-golang/dotfiles:41 -f containers/Containerfile-dotfiles .
       - name: Run podman build - systemd

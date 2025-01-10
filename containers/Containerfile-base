@@ -1,0 +1,10 @@
+ARG BASE_VERSION="41"
+
+FROM ghcr.io/gbraad-devenv/fedora/rdesktop:${BASE_VERSION}
+
+USER root
+
+RUN dnf install -y --setopt=tsflags=nodocs \
+    delve \
+    golang \
+    golang-bin

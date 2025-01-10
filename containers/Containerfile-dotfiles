@@ -1,13 +1,8 @@
 ARG BASE_VERSION="41"
 
-FROM ghcr.io/gbraad-devenv/fedora/dotfiles:${BASE_VERSION}
+FROM ghcr.io/gbraad-devenv/fedora/base:${BASE_VERSION}
 
 LABEL org.opencontainers.image.source = "https://github.com/gbraad-devenv/fedora"
-
-USER root
-
-RUN dnf install -y --setopt=tsflags=nodocs golang golang-bin
-
 
 USER gbraad
 
