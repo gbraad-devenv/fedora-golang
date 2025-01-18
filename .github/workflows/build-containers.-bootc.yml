@@ -26,7 +26,7 @@ jobs:
             -f containers/Containerfile-base .
       - name: Run podman build - dotfiles-bootc
         run: |
-          podman build -t ghcr.io/gbraad-devenv/fedora-golang/dotfile-bootcs:41 \
+          podman build -t ghcr.io/gbraad-devenv/fedora-golang/dotfiles-bootc:41 \
             --build-arg=BASE_IMAGE="ghcr.io/gbraad-devenv/fedora-golang/base-bootc" \
             --build-arg=BASE_VERSION=41 \
             -f containers/Containerfile-dotfiles .
