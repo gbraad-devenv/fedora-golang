@@ -19,16 +19,38 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Run podman build - base
-        run: podman build -t ghcr.io/gbraad-devenv/fedora-golang/base:41 -f containers/Containerfile-base .
+        run: |
+          podman build -t ghcr.io/gbraad-devenv/fedora-golang/base:41 \
+            --build-arg=BASE_IMAGE="ghcr.io/gbraad-devenv/fedora/dotfiles" \
+            --build-arg=BASE_VERSION=41 \
+            -f containers/Containerfile-base .
       - name: Run podman build - dotfiles
-        run: podman build -t ghcr.io/gbraad-devenv/fedora-golang/dotfiles:41 -f containers/Containerfile-dotfiles .
+        run: |
+          podman build -t ghcr.io/gbraad-devenv/fedora-golang/dotfiles:41 \
+            --build-arg=BASE_IMAGE="ghcr.io/gbraad-devenv/fedora-golang/base" \
+            --build-arg=BASE_VERSION=41 \
+            -f containers/Containerfile-dotfiles .
       - name: Run podman build - systemd
-        run: podman build -t ghcr.io/gbraad-devenv/fedora-golang/systemd:41 -f containers/Containerfile-systemd .
+        run: |
+          podman build -t ghcr.io/gbraad-devenv/fedora-golang/systemd:41 \
+            --build-arg=BASE_IMAGE="ghcr.io/gbraad-devenv/fedora-golang/dotfiles" \
+            --build-arg=BASE_VERSION=41 \
+            -f containers/Containerfile-systemd .
       - name: Run podman build - code-cli
-        run: podman build -t ghcr.io/gbraad-devenv/fedora-golang/code-cli:41 -f containers/Containerfile-code-cli .
+        run: |
+          podman build -t ghcr.io/gbraad-devenv/fedora-golang/code-cli:41 \
+            --build-arg=BASE_IMAGE="ghcr.io/gbraad-devenv/fedora-golang/systemd" \
+            --build-arg=BASE_VERSION=41 \
+            -f containers/Containerfile-code-cli .
       - name: Push image to ghcr.io - dotfiles
-        run: podman push --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} ghcr.io/gbraad-devenv/fedora-golang/dotfiles:41
+        run: |
+          podman push --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} \
+            ghcr.io/gbraad-devenv/fedora-golang/dotfiles:41
       - name: Push image to ghcr.io - systemd
-        run: podman push --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} ghcr.io/gbraad-devenv/fedora-golang/systemd:41
+        run: |
+          podman push --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} \
+            ghcr.io/gbraad-devenv/fedora-golang/systemd:41
       - name: Push image to ghcr.io - code-cli
-        run: podman push --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} ghcr.io/gbraad-devenv/fedora-golang/code-cli:41
+        run: |
+          podman push --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} \
+            ghcr.io/gbraad-devenv/fedora-golang/code-cli:41
