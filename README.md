@@ -26,6 +26,11 @@ $ podman run -it --rm ghcr.io/gbraad-devenv/fedora-golang/dotfiles:41
 $ podman run -d --name gosys ghcr.io/gbraad-devenv/fedora-golang/systemd:41
 ```
 
+### Bootc
+
+```
+$ bootc switch ghcr.io/gbraad-devenv/fedora-golang/systemd-bootc:41
+```
 
 
 Authors
