@@ -42,8 +42,8 @@ jobs:
 
       - name: Push image to ghcr.io - code-cli
         run: |
-          podman push ghcr.io/gbraad-devenv/fedora-golang/code-cli:stream9
+          podman push ghcr.io/gbraad-devenv/fedora-golang/code-cli:41
 
       - name: Push image to ghcr.io - code-cli-bootc
         run: |
-          podman push ghcr.io/gbraad-devenv/fedora-golang/code-cli-bootc:stream9
+          podman push ghcr.io/gbraad-devenv/fedora-golang/code-cli-bootc:41
