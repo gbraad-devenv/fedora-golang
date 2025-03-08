@@ -24,19 +24,13 @@ jobs:
       - name: Run podman build - base-bootc
         run: |
           podman build -t ghcr.io/gbraad-devenv/fedora-golang/base-bootc:41 \
-            --build-arg=BASE_IMAGE="ghcr.io/gbraad-devenv/fedora/dotfiles-bootc" \
+            --build-arg=BASE_IMAGE="ghcr.io/gbraad-devenv/fedora/systemd-bootc" \
             --build-arg=BASE_VERSION=41 \
             -f containers/Containerfile-base .
-      - name: Run podman build - dotfiles-bootc
-        run: |
-          podman build -t ghcr.io/gbraad-devenv/fedora-golang/dotfiles-bootc:41 \
-            --build-arg=BASE_IMAGE="ghcr.io/gbraad-devenv/fedora-golang/base-bootc" \
-            --build-arg=BASE_VERSION=41 \
-            -f containers/Containerfile-dotfiles .
       - name: Run podman build - systemd-bootc
         run: |
           podman build -t ghcr.io/gbraad-devenv/fedora-golang/systemd-bootc:41 \
-            --build-arg=BASE_IMAGE="ghcr.io/gbraad-devenv/fedora-golang/dotfiles-bootc" \
+            --build-arg=BASE_IMAGE="ghcr.io/gbraad-devenv/fedora-golang/base-bootc" \
             --build-arg=BASE_VERSION=41 \
             -f containers/Containerfile-systemd .
 
@@ -45,9 +39,6 @@ jobs:
           podman login ghcr.io -u ${{ github.actor }} \
             -p ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Push image to ghcr.io - dotfiles-bootc
-        run: |
-          podman push ghcr.io/gbraad-devenv/fedora-golang/dotfiles-bootc:41
       - name: Push image to ghcr.io - systemd-bootc
         run: |
           podman push ghcr.io/gbraad-devenv/fedora-golang/systemd-bootc:41
