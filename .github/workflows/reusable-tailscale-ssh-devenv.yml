@@ -53,7 +53,7 @@ jobs:
       - name: Remove unwanted stuff
         uses: gbraad-devenv/remove-unwanted@v1
 
-      - name: Tailscale
+      - name: Tailscale setup (host)
         uses: gbraad-actions/tailscale-action@v1
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
@@ -90,7 +90,7 @@ jobs:
           #podman exec ${{ inputs.prefix_name }}sys chown ${IMAGE_USER} /home/${IMAGE_USER}/Documents
           #podman exec ${{ inputs.prefix_name }}sys chown ${IMAGE_USER} /home/${IMAGE_USER}/Downloads
 
-      - name: Tailscale setup (root)
+      - name: Tailscale setup (devenv)
         run: |
           sleep 1
           until podman exec ${{ inputs.prefix_name }}sys tailscale up \
@@ -103,7 +103,7 @@ jobs:
               sleep 0.1
           done
         env:
-          TAILSCALE_AUTHKEY: ${{ secrets.TAILSCALE_AUTHKEY}}
+          TAILSCALE_AUTHKEY: ${{ secrets.TAILSCALE_AUTHKEY_DEVENV }}
 
       - name: Codium Server
         uses: gbraad-actions/codium-server-action@v1
