@@ -113,3 +113,20 @@ jobs:
               workflow_id: 'build-container-code.yml',
               ref: context.ref,
             });
+
+
+  trigger-test-projects:
+    runs-on: ubuntu-latest
+    needs:
+      - wait-for-build-containers
+    steps:
+      - name: Test projects build
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'test-projects.yml',
+              ref: context.ref,
+            });
