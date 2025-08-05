@@ -13,7 +13,11 @@ Usage
 ### Cloud
 
   * Open in [GitHub Codespaces](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=914744126&skip_quickstart=true)
-  * `def go run` and `def go sys` in [my dotfiles](https://github.com/gbraad/dotfiles/blob/main/zsh/.zshrc.d/devenv.zsh)
+
+### Dotfiles tools
+
+  * `devenv gofedora env` and `devenv gofedora start` in [my dotfiles](https://github.com/gbraad/dotfiles/blob/main/zsh/.zshrc.d/devenv.zsh)
+  * `devbox gofedora start`
 
 
 ### Container
@@ -32,6 +36,12 @@ $ podman run -d --name gosys ghcr.io/gbraad-devenv/fedora-golang/systemd:41
 $ bootc switch ghcr.io/gbraad-devenv/fedora-golang/systemd-bootc:41
 ```
 
+or using `machine.zsh` from my dotfiles:
+
+```
+$ machine gofedora start
+```
+
 
 Authors
 -------
@@ -39,3 +49,4 @@ Authors
 | [!["Gerard Braad"](http://gravatar.com/avatar/e466994eea3c2a1672564e45aca844d0.png?s=60)](http://gbraad.nl "Gerard Braad <me@gbraad.nl>") |
 |---|
 | [@gbraad](https://gbraad.nl/social)  
+
