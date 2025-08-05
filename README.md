@@ -15,7 +15,7 @@ Usage
   * Open in [GitHub Codespaces](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=914744126&skip_quickstart=true)
 
 ### Dotfiles tools
-Using `devenv.zsh` from my [my dotfiles](https://github.com/gbraad/dotfiles/blob/main/zsh/.zshrc.d/devenv.zsh).
+Using `devenv.zsh` from [my dotfiles](https://github.com/gbraad/dotfiles/blob/main/zsh/.zshrc.d/devenv.zsh).
 
 To run as a short run environment, use:
 ```
@@ -65,5 +65,6 @@ Authors
 | [!["Gerard Braad"](http://gravatar.com/avatar/e466994eea3c2a1672564e45aca844d0.png?s=60)](http://gbraad.nl "Gerard Braad <me@gbraad.nl>") |
 |---|
 | [@gbraad](https://gbraad.nl/social)  
+
 
 
