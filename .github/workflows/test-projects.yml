@@ -50,11 +50,11 @@ jobs:
         with:
           upstream: true
 
-      - name: 'Pre-heat' the 'gofedora' devenv-container
+      - name: Pre-heat the gofedora devenv-container
         uses: gbraad-dotfiles/devenv-action@main
         with:
           prefix: gofedora
-          action: start
+          command: start
 
       - name: Run apps command - checkout projects/crc
         uses: gbraad-dotfiles/apps-action@main
