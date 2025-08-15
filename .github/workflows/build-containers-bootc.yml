@@ -43,3 +43,8 @@ jobs:
         run: |
           podman push ghcr.io/gbraad-devenv/fedora-golang/systemd-bootc:41
 
+      - name: Tag as latest and push - systemd-bootc
+        run: |
+          podman tag ghcr.io/gbraad-devenv/fedora-golang/systemd-bootc:41 \
+            ghcr.io/gbraad-devenv/fedora-golang/systemd-bootc:latest
+          podman push ghcr.io/gbraad-devenv/fedora-golang/systemd-bootc:latest
