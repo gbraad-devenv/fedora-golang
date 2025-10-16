@@ -38,6 +38,8 @@ jobs:
       - name: Allow unprivileged userns (workaround)
         uses: gbraad-actions/warpbuild-unprivileged-userns@main
 
+      # TODO: checkout actionfiles
+
       # This folder will be used with the container
       - name: Create userdirs
         run: |
