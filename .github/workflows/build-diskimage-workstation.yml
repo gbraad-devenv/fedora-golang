@@ -66,7 +66,7 @@ jobs:
           --local \
           ${{ env.IMAGE_NAME }}
       env:
-        IMAGE_NAME: ghcr.io/gbraad-devenv/fedora-golang/workstation-bootc:41
+        IMAGE_NAME: ghcr.io/gbraad-devenv/fedora-golang/workstation-bootc:42
 
     - name: Set release tag
       id: get-tag
@@ -76,12 +76,12 @@ jobs:
     - name: Wrap disk image in container
       run: |
         podman build -t ghcr.io/gbraad-devenv/fedora-golang/workstation-disk:latest \
-          -f containers/Containerfile-disk .
+          -f machines/Containerfile-disk .
 
     - name: Tag image container
       run: |
         podman tag ghcr.io/gbraad-devenv/fedora-golang/workstation-disk:latest \
-          ghcr.io/gbraad-devenv/fedora-golang/workstation-disk:41
+          ghcr.io/gbraad-devenv/fedora-golang/workstation-disk:42
         podman tag ghcr.io/gbraad-devenv/fedora-golang/workstation-disk:latest \
           ghcr.io/gbraad-devenv/fedora-golang/workstation-disk:${{steps.get-tag.outputs.TAG}}
 
@@ -93,5 +93,5 @@ jobs:
     - name: Push image container to registry
       run: |
         podman push ghcr.io/gbraad-devenv/fedora-golang/workstation-disk:latest
-        podman push ghcr.io/gbraad-devenv/fedora-golang/workstation-disk:41
+        podman push ghcr.io/gbraad-devenv/fedora-golang/workstation-disk:42
         podman push ghcr.io/gbraad-devenv/fedora-golang/workstation-disk:${{steps.get-tag.outputs.TAG}}

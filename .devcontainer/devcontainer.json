@@ -1,6 +1,6 @@
 {
     "name": "Go development environment",
-    "image": "ghcr.io/gbraad-devenv/fedora-golang/code-cli:41",
+    "image": "ghcr.io/gbraad-devenv/fedora-golang/base:42",
     "runArgs": [ "--cap-add=NET_ADMIN", "--cap-add=NET_RAW", "--device=/dev/net/tun" ],
     "postStartCommand": ".github/install.sh",
 
