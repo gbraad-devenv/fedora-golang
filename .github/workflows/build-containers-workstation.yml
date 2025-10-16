@@ -35,5 +35,5 @@ jobs:
 
       - name: Push image to ghcr.io - workstation-bootc
         run: |
-          podman push ghcr.io/gbraad-devenv/fedora-golang/workstation-bootc:4
+          podman push ghcr.io/gbraad-devenv/fedora-golang/workstation-bootc:42
 
