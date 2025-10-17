@@ -38,7 +38,10 @@ jobs:
       - name: Allow unprivileged userns (workaround)
         uses: gbraad-actions/warpbuild-unprivileged-userns@main
 
-      # TODO: checkout actionfiles
+      - name: Checkout actionfiles
+        uses: actions/checkout@v4
+        with:
+          repository: gbraad-dotfiles/actionfiles
 
       # This folder will be used with the container
       - name: Create userdirs
@@ -58,11 +61,11 @@ jobs:
           prefix: gofedora
           command: start
 
-      - name: Run apps command - checkout projects/crc
-        uses: gbraad-dotfiles/apps-action@main
-        with:
-          appname: projects/crc
-          action: source checkout
+      #- name: Run apps command - checkout projects/crc
+      #  uses: gbraad-dotfiles/apps-action@main
+      #  with:
+      #    appname: projects/crc
+      #    action: source checkout
 
       - name: Run apps command - checkout projects/macadam
         uses: gbraad-dotfiles/apps-action@main
@@ -70,12 +73,18 @@ jobs:
           appname: projects/macadam
           action: source checkout
 
-      # separate checkout and compile due to docker permissions
-      - name: Run apps command - compile projects/crc
+      - name: Run apps command - checkout projects/gvproxy
         uses: gbraad-dotfiles/apps-action@main
         with:
-          appname: projects/crc
-          action: compile
+          appname: projects/gvproxy
+          action: source checkout
+
+      # separate checkout and compile due to docker permissions
+      #- name: Run apps command - compile projects/crc
+      #  uses: gbraad-dotfiles/apps-action@main
+      #  with:
+      #    appname: projects/crc
+      #    action: compile
 
       - name: Run apps command - compile projects/macadam
         uses: gbraad-dotfiles/apps-action@main
@@ -83,3 +92,8 @@ jobs:
           appname: projects/macadam
           action: compile
 
+      - name: Run apps command - compile projects/gvproxy
+        uses: gbraad-dotfiles/apps-action@main
+        with:
+          appname: projects/gvproxy
+          action: compile
